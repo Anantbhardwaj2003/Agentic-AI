@@ -1,7 +1,8 @@
 import React from 'react';
-import { OrchestrationPlan, AgentStep } from '../types';
+import type { OrchestrationPlan} from '../types';
 import { AgentCard } from './AgentCard';
 import { Icon } from './Icon';
+import { MarkdownRenderer } from './MarkdownRenderer';
 
 interface PlanVisualizerProps {
   plan: OrchestrationPlan;
@@ -9,7 +10,7 @@ interface PlanVisualizerProps {
   onToggleStep: (stepId: string) => void;
 }
 
-export const PlanVisualizer: React.FC<PlanVisualizerProps> = ({ plan, currentStepId, onToggleStep }) => {
+export const PlanVisualizer: React.FC<PlanVisualizerProps> = ({ plan, onToggleStep }) => {
   return (
     <div className="flex flex-col gap-6">
       {/* Thought Process Section */}
@@ -19,9 +20,9 @@ export const PlanVisualizer: React.FC<PlanVisualizerProps> = ({ plan, currentSte
           <Icon name="BrainCircuit" size={16} />
           <span className="text-xs font-bold uppercase tracking-wider">Orchestrator Thought Process</span>
         </div>
-        <p className="text-sm text-zinc-300 leading-relaxed italic">
-          "{plan.thoughtProcess}"
-        </p>
+        <div className="text-sm text-zinc-300 leading-relaxed italic opacity-90">
+          <MarkdownRenderer content={plan.thoughtProcess} />
+        </div>
       </div>
 
       {/* Steps List */}
