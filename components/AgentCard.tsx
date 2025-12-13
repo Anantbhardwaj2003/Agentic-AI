@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { AgentStep, AGENT_CONFIGS } from '../types';
+import type { AgentStep } from '../types';
+import { AGENT_CONFIGS } from '../types';
 import { Icon } from './Icon';
+import { MarkdownRenderer } from './MarkdownRenderer';
 
 interface AgentCardProps {
   step: AgentStep;
@@ -134,7 +136,7 @@ export const AgentCard: React.FC<AgentCardProps> = ({ step, index, isActive, isC
                   </button>
                 </div>
                 
-                {/* Terminal Styled Output */}
+                {/* Terminal Styled Output with Markdown Rendering */}
                 <div className="bg-[#0d0d10] rounded-xl border border-white/10 shadow-inner overflow-hidden">
                   {/* Fake Terminal Header */}
                   <div className="bg-white/5 px-4 py-2 border-b border-white/5 flex items-center gap-2">
@@ -147,10 +149,8 @@ export const AgentCard: React.FC<AgentCardProps> = ({ step, index, isActive, isC
                   </div>
                   
                   {/* Content */}
-                  <div className="p-5 markdown-content">
-                    <div className="whitespace-pre-wrap font-mono text-xs md:text-sm leading-relaxed text-zinc-300/90">
-                        {step.output}
-                    </div>
+                  <div className="p-5">
+                    <MarkdownRenderer content={step.output} />
                   </div>
                 </div>
               </div>
